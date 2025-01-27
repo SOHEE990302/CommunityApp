@@ -5,23 +5,10 @@ using CommunityApp.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
-    ?? Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection") 
+var connStr = builder.Configuration.GetConnectionString("DefaultConnection") 
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlite(connStr));
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    if (connectionString.Contains("Data Source")) // SQLite
-    {
-        options.UseSqlite(connectionString);
-    }
-    else // SQL Server
-    {
-        options.UseSqlServer(connectionString);
-    }
-});
-
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
@@ -46,19 +33,11 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 // Apply migrations at startup
-using (var scope = app.Services.CreateScope())
-{
+using (var scope = app.Services.CreateScope()) {
     var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<ApplicationDbContext>();
 
-    try
-    {
-        context.Database.Migrate();
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Migration failed: {ex.Message}");
-    }
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    context.Database.Migrate();
 }
 
 app.Run();
