@@ -6,18 +6,18 @@ namespace CommunityApp.Models
     public class City
     {
         [Key]
-        public int CityId { get; set; } // Primary Key (자동 증가)
+        public int CityId { get; set; }
 
         [Required]
-        public string? CityName { get; set; } // Example: Surrey
+        public string? CityName { get; set; }
 
         [Required]
-        public int Population { get; set; } // Example: 300,000
+        public int Population { get; set; }
 
         [Required]
-        public string? ProvinceCode { get; set; } // Foreign Key
+        public string? ProvinceCode { get; set; }
 
         [ForeignKey("ProvinceCode")]
-        public Province? Province { get; set; } // Navigation Property
+        public Province? Province { get; set; }
     }
 }

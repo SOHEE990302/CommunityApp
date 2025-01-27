@@ -7,12 +7,11 @@ namespace CommunityApp.Models
     {
         [Key]
         [Required]
-        public string? ProvinceCode { get; set; } // Primary Key (예: BC)
+        public string? ProvinceCode { get; set; }
 
         [Required]
-        public string? ProvinceName { get; set; } // Example: British Columbia
+        public string? ProvinceName { get; set; }
 
-        // City와 1:N 관계 설정
         public ICollection<City> Cities { get; set; } = new List<City>();
     }
 }

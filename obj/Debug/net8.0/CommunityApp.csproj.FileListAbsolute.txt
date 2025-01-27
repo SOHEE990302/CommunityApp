@@ -309,3 +309,4 @@ C:\Users\alisa\Desktop\BCIT\COMP4870\LAB\CommunityApp\obj\Debug\net8.0\refint\Co
 C:\Users\alisa\Desktop\BCIT\COMP4870\LAB\CommunityApp\obj\Debug\net8.0\CommunityApp.pdb
 C:\Users\alisa\Desktop\BCIT\COMP4870\LAB\CommunityApp\obj\Debug\net8.0\CommunityApp.genruntimeconfig.cache
 C:\Users\alisa\Desktop\BCIT\COMP4870\LAB\CommunityApp\obj\Debug\net8.0\ref\CommunityApp.dll
+C:\Users\alisa\Desktop\BCIT\COMP4870\LAB\CommunityApp\obj\Debug\net8.0\CommunityApp.sourcelink.json
