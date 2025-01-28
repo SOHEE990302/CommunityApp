@@ -2,24 +2,45 @@
 @model CommunityApp.Pages_Provinces.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Province Details";
 }
 
-<h1>Details</h1>
+<h1>Province Details</h1>
 
 <div>
     <h4>Province</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Province.ProvinceName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Province.ProvinceName)
-        </dd>
+        <dt class="col-sm-2">Province Code</dt>
+        <dd class="col-sm-10">@Model.Province.ProvinceCode</dd>
+
+        <dt class="col-sm-2">Province Name</dt>
+        <dd class="col-sm-10">@Model.Province.ProvinceName</dd>
     </dl>
 </div>
+
+<h4>Cities in Province</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>City ID</th>
+            <th>City Name</th>
+            <th>Population</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var city in Model.Province.Cities ?? Enumerable.Empty<CommunityApp.Models.City>())
+        {
+            <tr>
+                <td>@city.CityId</td>
+                <td>@city.CityName</td>
+                <td>@city.Population</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Province.ProvinceCode">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Province.ProvinceCode" class="btn btn-warning">Edit</a>
+    <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
 </div>

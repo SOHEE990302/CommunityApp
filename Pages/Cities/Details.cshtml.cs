@@ -20,24 +20,25 @@ namespace CommunityApp.Pages_Cities
         }
 
         public City City { get; set; } = default!;
+public async Task<IActionResult> OnGetAsync(int? id)
+{
+    if (id == null)
+    {
+        return NotFound();
+    }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+    var city = await _context.Cities
+        .Include(c => c.Province)
+        .FirstOrDefaultAsync(m => m.CityId == id);
 
-            var city = await _context.Cities.FirstOrDefaultAsync(m => m.CityId == id);
+    if (city is not null)
+    {
+        City = city;
+        return Page();
+    }
 
-            if (city is not null)
-            {
-                City = city;
+    return NotFound();
+}
 
-                return Page();
-            }
-
-            return NotFound();
-        }
     }
 }

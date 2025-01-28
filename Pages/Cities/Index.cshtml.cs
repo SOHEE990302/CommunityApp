@@ -22,9 +22,11 @@ namespace CommunityApp.Pages_Cities
         public IList<City> City { get;set; } = default!;
 
         public async Task OnGetAsync()
-        {
-            City = await _context.Cities
-                .Include(c => c.Province).ToListAsync();
-        }
+{
+    City = await _context.Cities
+        .Include(c => c.Province)
+        .ToListAsync();
+}
+
     }
 }

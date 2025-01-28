@@ -2,45 +2,36 @@
 @model CommunityApp.Pages_Cities.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cities";
 }
 
-<h1>Index</h1>
+<h1>City List</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-primary">Create New City</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.City[0].CityName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City[0].Population)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City[0].Province)
-            </th>
-            <th></th>
+            <th>City ID</th>
+            <th>City Name</th>
+            <th>Population</th>
+            <th>Province</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.City) {
+@foreach (var city in Model.City) {
         <tr>
+            <td>@city.CityId</td>
+            <td>@city.CityName</td>
+            <td>@city.Population</td>
+            <td>@city.Province?.ProvinceName </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CityName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Population)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Province.ProvinceCode)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.CityId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.CityId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.CityId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@city.CityId" class="btn btn-warning">Edit</a>
+                <a asp-page="./Details" asp-route-id="@city.CityId" class="btn btn-info">Details</a>
+                <a asp-page="./Delete" asp-route-id="@city.CityId" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }

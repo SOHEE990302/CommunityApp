@@ -2,33 +2,41 @@
 @model CommunityApp.Pages_Provinces.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Provinces";
 }
 
-<h1>Index</h1>
+<h1>Province List</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-primary">Create New Province</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Province[0].ProvinceName)
-            </th>
-            <th></th>
+            <th>Province Code</th>
+            <th>Province Name</th>
+            <th>Number of Cities</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Province) {
+@foreach (var province in Model.Province) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ProvinceName)
+                @Html.DisplayFor(modelItem => province.ProvinceCode)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ProvinceCode">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ProvinceCode">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ProvinceCode">Delete</a>
+                @Html.DisplayFor(modelItem => province.ProvinceName)
+            </td>
+            <td>
+                @province.Cities?.Count()
+            </td>
+            <td>
+
+                <a asp-page="./Edit" asp-route-id="@province.ProvinceCode" class="btn btn-warning">Edit</a>
+                <a asp-page="./Details" asp-route-code="@province.ProvinceCode" class="btn btn-info">Details</a>
+                <a asp-page="./Delete" asp-route-id="@province.ProvinceCode" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }
